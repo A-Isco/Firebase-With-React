@@ -6,6 +6,7 @@ import { AuthContext } from "./context/AuthContext";
 import SignPage from "./Pages/SignupPage";
 import LoginPage from "./Pages/LoginPage";
 import HomePage from "./Pages/HomePage";
+import CreatePhotoPage from "./Pages/CreatePhotoPage";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -28,6 +29,7 @@ function App() {
               </RequireAuth>
             }
           />
+          <Route path="/photo/create" element={<CreatePhotoPage />} />
           <Route path="*" element={<LoginPage />} />
         </Routes>
       </BrowserRouter>

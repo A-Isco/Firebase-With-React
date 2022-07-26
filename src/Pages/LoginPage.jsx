@@ -76,13 +76,13 @@ let LoginPage = () => {
       </header>
       <div className="form-container">
         <section>
-          <h3 class="font-bold text-2xl">Welcome to Startup</h3>
-          <p class="text-gray-600 pt-2">Login to your account</p>
+          <h3 className="font-bold text-2xl">Welcome to Startup</h3>
+          <p className="text-gray-600 pt-2">Login to your account</p>
         </section>
 
         <section className="mt-10">
           <form className="flex flex-col" onSubmit={handleSubmit}>
-            <div class="field-container-form">
+            <div className="field-container-form">
               <input
                 className="input-form"
                 type="email"
@@ -91,7 +91,7 @@ let LoginPage = () => {
                 onChange={(event) => handleInputs(event)}
               />
             </div>
-            <div class="field-container-form">
+            <div className="field-container-form">
               <input
                 className="input-form"
                 type="password"
