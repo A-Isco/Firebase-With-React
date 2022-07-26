@@ -87,26 +87,39 @@ let CreatePhotoPage = () => {
 
   return (
     <div className="container-sm  p-5">
-      <h1>Create Photo</h1>
-      <form onSubmit={handleAddPhoto}>
-        <input
-          type="text"
-          name="title"
-          onChange={(event) => handleInputs(event)}
-        />
-        <input
-          type="file"
-          name="photoUrl"
-          onChange={(e) => setFile(e.target.files[0])}
-        />
-        <button
-          disabled={percentage !== null && percentage < 100}
-          type="submit"
-        >
-          Submit
-        </button>
-        {errorMessage !== "" ? <div>{errorMessage}</div> : null}
-      </form>
+      <div className="photos-container">
+        <section className="text-center">
+          <h3 className="font-bold text-2xl">Create Photo</h3>
+        </section>
+
+        <section className="mt-10">
+          <form className="flex flex-col" onSubmit={handleAddPhoto}>
+            <div className="field-container-form">
+              <input
+                className="input-form"
+                type="text"
+                name="title"
+                onChange={(event) => handleInputs(event)}
+              />
+            </div>
+            <div className="field-container-form">
+              <input
+                type="file"
+                name="photoUrl"
+                onChange={(e) => setFile(e.target.files[0])}
+              />
+            </div>
+            <button
+              className="button-form"
+              disabled={percentage !== null && percentage < 100}
+              type="submit"
+            >
+              Create Photo
+            </button>
+            {errorMessage !== "" ? <div>{errorMessage}</div> : null}
+          </form>
+        </section>
+      </div>
     </div>
   );
 };

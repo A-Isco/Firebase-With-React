@@ -18,6 +18,10 @@
   .form-container {
     @apply bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl;
   }
+
+  .photos-container {
+    @apply bg-white  mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl;
+  }
 }
 
 body {
