@@ -5,8 +5,9 @@ import { AuthContext } from "./context/AuthContext";
 // import { useNavigate } from "react-router-dom";
 import SignPage from "./Pages/SignupPage";
 import LoginPage from "./Pages/LoginPage";
-import HomePage from "./Pages/HomePage";
+import PhotosPage from "./Pages/PhotosPage";
 import CreatePhotoPage from "./Pages/CreatePhotoPage";
+import HomePage from "./Pages/HomePage";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -22,13 +23,14 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignPage />} />
           <Route
-            path="/home"
+            path="/photos"
             element={
               <RequireAuth>
-                <HomePage />
+                <PhotosPage />
               </RequireAuth>
             }
           />
+          <Route path="/home" element={<HomePage />} />
           <Route path="/photo/create" element={<CreatePhotoPage />} />
           <Route path="*" element={<LoginPage />} />
         </Routes>
