@@ -11,6 +11,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { EditorState, convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import { Markup } from "interweave";
+import NavBar from "../componentes/NavBar";
 
 let HomePage = () => {
   const { currentUser } = useContext(AuthContext);
@@ -55,8 +56,9 @@ let HomePage = () => {
 
   return (
     <div className="">
-      <section className="text-center">
-        <h3 className="font-bold text-4xl">Home Page</h3>
+      <NavBar />
+      <section className="text-center mt-8 ">
+        <h3 className="font-bold text-4xl mt-3">Home Page</h3>
       </section>
       <div className="editor-container">
         <Editor

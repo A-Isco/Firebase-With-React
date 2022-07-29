@@ -9,9 +9,9 @@ import { async } from "@firebase/util";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import moment from "moment-timezone";
 import { useNavigate } from "react-router-dom";
+import NavBar from "../componentes/NavBar";
 
 let CreatePhotoPage = () => {
-  // const { currentUser } = useContext(AuthContext);
   const [data, setData] = useState({
     title: "",
     photoUrl: "",
@@ -68,7 +68,7 @@ let CreatePhotoPage = () => {
   const handleAddPhoto = async (e) => {
     e.preventDefault();
 
-    if (!file || !data.photoUrl) {
+    if (!file || !data.title) {
       setErrorMessage("Photo and Details cannot be empty");
       return;
     }
@@ -79,15 +79,17 @@ let CreatePhotoPage = () => {
         date: moment.tz().unix(),
       });
       console.log(res);
-      navigate("/home");
+      navigate("/photos");
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <div className="container-sm  p-5">
-      <div className="photos-container">
+    <>
+      <NavBar />
+
+      <div className="editor-container">
         <section className="text-center">
           <h3 className="font-bold text-2xl">Create Photo</h3>
         </section>
@@ -110,7 +112,7 @@ let CreatePhotoPage = () => {
               />
             </div>
             <button
-              className="button-form"
+              className="button-form "
               disabled={percentage !== null && percentage < 100}
               type="submit"
             >
@@ -120,7 +122,7 @@ let CreatePhotoPage = () => {
           </form>
         </section>
       </div>
-    </div>
+    </>
   );
 };
 

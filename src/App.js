@@ -30,8 +30,22 @@ function App() {
               </RequireAuth>
             }
           />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/photo/create" element={<CreatePhotoPage />} />
+          <Route
+            path="/home"
+            element={
+              <RequireAuth>
+                <HomePage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/photo/create"
+            element={
+              <RequireAuth>
+                <CreatePhotoPage />
+              </RequireAuth>
+            }
+          />
           <Route path="*" element={<LoginPage />} />
         </Routes>
       </BrowserRouter>
