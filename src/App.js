@@ -2,12 +2,12 @@ import "./App.css";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
-// import { useNavigate } from "react-router-dom";
 import SignPage from "./Pages/SignupPage";
 import LoginPage from "./Pages/LoginPage";
 import PhotosPage from "./Pages/PhotosPage";
 import CreatePhotoPage from "./Pages/CreatePhotoPage";
 import HomePage from "./Pages/HomePage";
+import ErrorPage from "./Pages/ErrorPage";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -46,7 +46,7 @@ function App() {
               </RequireAuth>
             }
           />
-          <Route path="*" element={<LoginPage />} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>
     </div>

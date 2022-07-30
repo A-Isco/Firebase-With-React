@@ -22,12 +22,15 @@ let CreatePhotoPage = () => {
   const [file, setFile] = useState("");
   const [percentage, setPercentage] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const uploadFile = () => {
       const uniqueName = new Date().getTime() + file.name;
       const storageRef = ref(storage, uniqueName);
       const uploadTask = uploadBytesResumable(storageRef, file);
+
+      setLoading(true);
 
       uploadTask.on(
         "state_changed",
@@ -53,6 +56,7 @@ let CreatePhotoPage = () => {
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             setData((data) => ({ ...data, photoUrl: downloadURL }));
+            setLoading(false);
           });
         }
       );
@@ -78,7 +82,6 @@ let CreatePhotoPage = () => {
         ...data,
         date: moment.tz().unix(),
       });
-      console.log(res);
       navigate("/photos");
     } catch (error) {
       console.log(error);
@@ -108,17 +111,20 @@ let CreatePhotoPage = () => {
               <input
                 type="file"
                 name="photoUrl"
+                accept=".jpg,.png,.jpeg"
                 onChange={(e) => setFile(e.target.files[0])}
               />
             </div>
             <button
-              className="button-form "
-              disabled={percentage !== null && percentage < 100}
+              className="button-form"
+              disabled={(percentage !== null && percentage < 100) || loading}
               type="submit"
             >
               Create Photo
             </button>
-            {errorMessage !== "" ? <div>{errorMessage}</div> : null}
+            {errorMessage !== "" ? (
+              <div className=" error-container">{errorMessage}</div>
+            ) : null}
           </form>
         </section>
       </div>

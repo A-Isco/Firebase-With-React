@@ -55,11 +55,8 @@ let PhotosPage = () => {
       <NavBar />
       <div className="container-sm  p-5">
         <section className="text-center mb-10">
-          <h1 className="font-bold text-5xl text-white mb-8">Home Page</h1>
-          <NavLink
-            className="mt-5  bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-            to={"/photo/create"}
-          >
+          <h3 className="font-bold text-4xl mt-3 mb-8 ">Photos Page</h3>
+          <NavLink className="mt-5  blue-button" to={"/photo/create"}>
             Add Photo
           </NavLink>
         </section>

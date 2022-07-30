@@ -1,3 +1,5 @@
+import { getAuth, signOut } from "firebase/auth";
+
 const AuthReducer = (state, action) => {
   switch (action.type) {
     case "LOGIN": {
@@ -6,9 +8,16 @@ const AuthReducer = (state, action) => {
       };
     }
     case "LOGOUT": {
-      return {
-        currentUser: null,
-      };
+      const auth = getAuth();
+      signOut(auth)
+        .then(() => {
+          return {
+            currentUser: null,
+          };
+        })
+        .catch((error) => {
+          alert(error);
+        });
     }
     default:
       return state;

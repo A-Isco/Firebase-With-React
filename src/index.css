@@ -15,6 +15,10 @@
     @apply mb-6 pt-3 rounded bg-gray-200;
   }
 
+  .button-form-container {
+    @apply mb-6 pt-3 rounded;
+  }
+
   .form-container {
     @apply bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl;
   }
@@ -33,6 +37,13 @@
 
   .html-container {
     @apply bg-slate-400	 max-w-lg mx-auto p-3 mt-5  w-1/2 rounded-lg shadow-2xl;
+  }
+
+  .error-container {
+    @apply text-center font-medium mt-3 p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800;
+  }
+  .rounded-button {
+    @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full;
   }
 }
 

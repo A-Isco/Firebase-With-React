@@ -3,6 +3,7 @@ import { app, database } from "../firebaseConfig";
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import {
   getAuth,
@@ -116,7 +117,19 @@ let LoginPage = () => {
             >
               Login with Google
             </button>
-            {errorMessage !== "" ? <div>{errorMessage}</div> : null}
+            <div className="button-form-container mt-5 text-center">
+              <NavLink to={"/signup"} className="rounded-button mt-3">
+                Create Account
+              </NavLink>
+            </div>
+
+            {errorMessage !== "" ? (
+              <div className=" error-container">
+                {errorMessage == "internal error"
+                  ? "Email or Password cannot be empty"
+                  : errorMessage}
+              </div>
+            ) : null}
           </form>
         </section>
       </div>

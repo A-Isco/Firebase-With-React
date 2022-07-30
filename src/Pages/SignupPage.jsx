@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { app, database } from "../firebaseConfig";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 let SignPage = () => {
   const [data, setData] = useState({
@@ -31,7 +32,7 @@ let SignPage = () => {
         data.password
       );
       console.log(response.user.email);
-      navigate("/home");
+      navigate("/login");
     } catch (error) {
       let errorCode = error.code.split("auth/")[1].split("-").join(" ");
       setErrorMessage(errorCode);
@@ -80,8 +81,18 @@ let SignPage = () => {
             >
               Sign Up
             </button>
-
-            {errorMessage !== "" ? <div>{errorMessage}</div> : null}
+            <div className="button-form-container mt-5 text-center">
+              <NavLink to={"/login"} className="rounded-button mt-3">
+                Already have account
+              </NavLink>
+            </div>
+            {errorMessage !== "" ? (
+              <div className=" error-container">
+                {errorMessage == "internal error"
+                  ? "Email or Password cannot be empty"
+                  : errorMessage}
+              </div>
+            ) : null}{" "}
           </form>
         </section>
       </div>
