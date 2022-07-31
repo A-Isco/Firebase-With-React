@@ -20,6 +20,10 @@ function App() {
     <div className="body-bg min-h-screen pt-12 md:pt-20 pb-6 px-2 md:px-0">
       <BrowserRouter>
         <Routes>
+          <Route
+            path="/"
+            element={currentUser ? <HomePage /> : <LoginPage />}
+          />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignPage />} />
           <Route

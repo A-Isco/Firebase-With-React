@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { app, database, storage } from "../firebaseConfig";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { AuthContext } from "../context/AuthContext";
-import { useContext } from "react";
-import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { collection, addDoc } from "firebase/firestore";
-import { async } from "@firebase/util";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import moment from "moment-timezone";
 import { useNavigate } from "react-router-dom";
@@ -78,11 +73,13 @@ let CreatePhotoPage = () => {
     }
 
     try {
+      setLoading(true);
       const res = await addDoc(collection(database, "photos"), {
         ...data,
         date: moment.tz().unix(),
       });
       navigate("/photos");
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }

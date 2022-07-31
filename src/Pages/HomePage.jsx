@@ -14,6 +14,7 @@ import { Markup } from "interweave";
 import NavBar from "../componentes/NavBar";
 
 let HomePage = () => {
+  // const user = firebase.auth().currentUser;
   const { currentUser } = useContext(AuthContext);
 
   const [editorState, setEditorState] = useState(EditorState.createEmpty());

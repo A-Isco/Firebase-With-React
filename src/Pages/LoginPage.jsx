@@ -4,15 +4,24 @@ import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-
 import {
   getAuth,
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 let LoginPage = () => {
+  const auth = getAuth();
+  let navigate = useNavigate();
+
+  // onAuthStateChanged(auth, (user) => {
+  //   if (user) {
+  //     // navigate("/home");
+  //   }
+  // });
+
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -21,10 +30,6 @@ let LoginPage = () => {
   const [loading, setLoading] = useState(false);
 
   const { dispatch } = useContext(AuthContext);
-
-  let navigate = useNavigate();
-
-  const auth = getAuth();
 
   const handleInputs = (event) => {
     let inputs = { [event.target.name]: event.target.value };
