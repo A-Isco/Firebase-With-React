@@ -1,5 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import SignPage from "./Pages/SignupPage";
@@ -8,9 +10,12 @@ import PhotosPage from "./Pages/PhotosPage";
 import CreatePhotoPage from "./Pages/CreatePhotoPage";
 import HomePage from "./Pages/HomePage";
 import ErrorPage from "./Pages/ErrorPage";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
-  const { currentUser } = useContext(AuthContext);
+  const { auth } = useContext(AuthContext);
+  let currentUser = auth.currentUser;
 
   const RequireAuth = ({ children }) => {
     return currentUser ? children : <Navigate to="/login" />;

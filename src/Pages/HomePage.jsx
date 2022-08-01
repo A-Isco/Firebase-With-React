@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { app, database, storage } from "../firebaseConfig";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { AuthContext } from "../context/AuthContext";
-import { useContext } from "react";
 import { collection, doc, onSnapshot, setDoc } from "firebase/firestore";
 import { list, ref, deleteObject } from "firebase/storage";
 import { async } from "@firebase/util";
@@ -14,7 +13,6 @@ import { Markup } from "interweave";
 import NavBar from "../componentes/NavBar";
 
 let HomePage = () => {
-  // const user = firebase.auth().currentUser;
   const { currentUser } = useContext(AuthContext);
 
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -25,8 +23,6 @@ let HomePage = () => {
     setEditorState(editorState);
     setContent(draftToHtml(convertToRaw(editorState.getCurrentContent())));
   };
-
-  // console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())));
 
   useEffect(() => {
     const unsub = onSnapshot(
@@ -49,7 +45,6 @@ let HomePage = () => {
       const res = await setDoc(doc(database, "content", "contentId"), {
         content,
       });
-      // console.log(res);
     } catch (error) {
       console.log(error);
     }

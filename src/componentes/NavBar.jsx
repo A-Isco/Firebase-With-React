@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { app, database, storage } from "../firebaseConfig";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
@@ -10,8 +14,15 @@ let NavBar = () => {
 
   const { dispatch } = useContext(AuthContext);
 
+  const auth = getAuth();
+
   const handleLogOut = () => {
-    dispatch({ type: "LOGOUT" });
+    const auth = getAuth();
+    signOut(auth)
+      .then(console.log("logged out"))
+      .catch((error) => {
+        alert(error);
+      });
   };
 
   return (
@@ -39,7 +50,7 @@ let NavBar = () => {
           </div>
           <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             <div className="bg-gray-800 p-1 rounded-full text-lg	mr-5 text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-              Hi : {`${currentUser.email}`}
+              Hi : {`${auth.currentUser.email}`}
             </div>
             <button
               onClick={handleLogOut}

@@ -8,16 +8,16 @@ const AuthReducer = (state, action) => {
       };
     }
     case "LOGOUT": {
-      // const auth = getAuth();
-      // signOut(auth)
-      //   .then(() => {
-      //     return {
-      //       currentUser: null,
-      //     };
-      //   })
-      //   .catch((error) => {
-      //     alert(error);
-      //   });
+      const auth = getAuth();
+      signOut(auth)
+        .then(() => {
+          return {
+            currentUser: null,
+          };
+        })
+        .catch((error) => {
+          alert(error);
+        });
       return {
         currentUser: null,
       };

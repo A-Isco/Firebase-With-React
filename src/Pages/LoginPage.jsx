@@ -9,18 +9,14 @@ import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
+  setPersistence,
+  browserSessionPersistence,
   onAuthStateChanged,
 } from "firebase/auth";
 
 let LoginPage = () => {
-  const auth = getAuth();
+  const { auth } = useContext(AuthContext);
   let navigate = useNavigate();
-
-  // onAuthStateChanged(auth, (user) => {
-  //   if (user) {
-  //     // navigate("/home");
-  //   }
-  // });
 
   const [data, setData] = useState({
     email: "",
@@ -41,17 +37,23 @@ let LoginPage = () => {
 
     setLoading(true);
     try {
-      const response = await signInWithEmailAndPassword(
-        auth,
-        data.email,
-        data.password
-      );
-      dispatch({ type: "LOGIN", payload: response.user });
+      setPersistence(auth, browserSessionPersistence)
+        .then(() => {
+          const response = signInWithEmailAndPassword(
+            auth,
+            data.email,
+            data.password
+          );
+          navigate("/home");
+        })
+        .catch((error) => {
+          let errorCode = error.code.split("auth/")[1].split("-").join(" ");
+          setErrorMessage(errorCode);
+        });
+
       console.log("Logged In");
-      navigate("/home");
     } catch (error) {
-      let errorCode = error.code.split("auth/")[1].split("-").join(" ");
-      setErrorMessage(errorCode);
+      console.log(error);
     }
     setLoading(false);
   };
@@ -65,7 +67,6 @@ let LoginPage = () => {
       dispatch({ type: "LOGIN", payload: response.user });
       console.log("Logged In");
       navigate("/home");
-      // console.log(response.user.email);
     } catch (error) {
       let errorCode = error.code.split("auth/")[1].split("-").join(" ");
       setErrorMessage(errorCode);
